@@ -1,138 +1,141 @@
-# ✦ Sheena Marie Cordova — Portfolio Web App
+# ✦ Sheena Marie Cordova — Personal Portfolio
 
-A multipage personal portfolio built with **Streamlit (Python)**, featuring a pink & purple dark aesthetic, real certificate images, and interactive components.
-
----
-
-## 👩‍💻 About This Project
-
-This is the portfolio web application of **Sheena Marie Cordova**, a 3rd-year **BS Computer Science** student at **Dr. Emilio B. Espinosa Sr. Memorial State College of Agriculture and Technology (DEBESMSCAT)**, Masbate, Philippines.
-
-Built as a course requirement demonstrating multipage web application development using the Streamlit framework.
+A personal portfolio website built with **Streamlit**, showcasing the academic background, certificates, and contact information of Sheena Marie Cordova, a 3rd-year BS Computer Science student at DEBESMSCAT, Masbate, Philippines.
 
 ---
 
-## 🗂️ Project Structure
+## 📸 Preview
+
+The portfolio features a dark, elegant aesthetic with a pink-to-purple gradient palette, serif typography (Cormorant Garamond), and a monospace accent font (Space Mono).
+
+---
+
+## 📁 Project Structure
 
 ```
-portfolio_app/
+portfolio/
 │
-├── Home.py                  # Main entry point — Hero, photo, What I Do
+├── home.py                  # Main entry point — contains all pages via session-state router
 │
-├── pages/
-│   ├── about.py             # About Me — bio, education timeline, core values
-│   ├── certificates.py      # Certificates — 3 real certificate images
-│   └── contact.py           # Contact — form with validation, social links
+├── pages/                   # Standalone page files (alternative multi-page setup)
+│   ├── about.py             # About Me page
+│   ├── certificates.py      # Certificates & Awards page
+│   └── contact.py           # Contact form page
 │
-├── sheena.jpg               # Profile photo (displayed in hero section)
-├── cert1.png                # Python Essentials 1 — Cisco / Python Institute
-├── cert2.png                # Getting Started with Cisco Packet Tracer — Cisco
-├── cert3.jpg                # SQL Analytics and BI on Databricks — Simplilearn
+├── sheena.png               # Profile photo (place in root directory)
+├── cert1.png                # Certificate image 1 — Python Essentials 1
+├── cert2.png                # Certificate image 2 — Cisco Packet Tracer
+├── cert3.jpg                # Certificate image 3 — Databricks SQL Analytics
 │
-├── .streamlit/
-│   └── config.toml          # Theme config (pink & purple dark theme)
-│
-└── README.md                # This file
+└── requirements.txt         # Python dependencies
 ```
 
 ---
 
-## 📄 Pages
+## 🖥️ Pages
 
-| Page | File | Description |
+### 🏠 Home
+- Hero section with name, role, and short bio
+- Skill tags (Python, Web Dev, Data Structures, UI/UX, Problem Solving)
+- Profile photo with gradient fallback if image is missing
+- Quick-stats bar (Year Level, GWA, Skills, Certificates)
+- Featured skills section with visual cards
+- "Get In Touch" button navigating to Contact
+
+### 👤 About Me
+- Personal bio and background
+- Quick Info card (name, school, program, year, location, status)
+- Interests & hobbies chips
+- Education timeline (College → Senior High → Junior High)
+- Core Values section (Purposeful, Curious, Collaborative, Creative)
+
+### 🏆 Certificates & Awards
+Displays verified certificates in a 3-column card layout:
+
+| Certificate | Issuer | Date |
 |---|---|---|
-| 🏠 Home | `Home.py` | Hero section with profile photo, skill tags, What I Do cards, quote |
-| 👤 About | `pages/about.py` | Bio, Quick Info panel, Education Timeline, Core Values |
-| 🏆 Certificates | `pages/certificates.py` | 3 real certificate images with metadata |
-| ✉️ Contact | `pages/contact.py` | Contact form with validation, contact info, social links |
+| Python Essentials 1 | Cisco Networking Academy · Python Institute | Mar 31, 2026 |
+| Getting Started with Cisco Packet Tracer | Cisco Networking Academy | Mar 26, 2026 |
+| Get Started with SQL Analytics and BI on Databricks | Databricks · Simplilearn SkillUp | Mar 31, 2026 |
+
+Certificate images are loaded from local files and encoded to Base64. A placeholder card is shown if the image file is not found.
+
+### ✉️ Contact
+- Contact form with validation (name, email, subject, message, consent checkbox)
+- Contact info panel (email, location, school, response time)
+- Social links (GitHub, Twitter/X, Facebook)
+- "Open to Opportunities" availability banner
 
 ---
 
-## ⚡ Features
+## 🚀 Getting Started
 
-- **Multipage navigation** via Streamlit sidebar
-- **Profile photo** embedded as base64 in a glowing circular frame
-- **Real certificate images** displayed with pink-purple gradient borders
-- **Interactive contact form** with live validation and message preview
-- **Pink & purple dark theme** with custom fonts (Cormorant Garamond, Space Mono, DM Sans)
-- **Responsive layout** using Streamlit columns
+### Prerequisites
+- Python 3.8 or higher
+- pip
 
----
+### Installation
 
-## 🚀 How to Run
+1. **Clone or download** the project files into a folder.
 
-### 1. Install dependencies
+2. **Install dependencies:**
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-```bash
-pip install streamlit
-```
+3. **Add your assets** to the project root:
+   - `sheena.png` — your profile photo
+   - `cert1.png`, `cert2.png`, `cert3.jpg` — certificate images
 
-### 2. Navigate to the project folder
+4. **Run the app:**
+   ```bash
+   streamlit run home.py
+   ```
 
-```bash
-cd portfolio_app
-```
-
-### 3. Run the app
-
-```bash
-streamlit run Home.py
-```
-
-### 4. Open in browser
-
-```
-http://localhost:8501
-```
+5. Open your browser and go to `http://localhost:8501`.
 
 ---
 
-## 📦 Requirements
+## ⚙️ How Navigation Works
 
-```
-streamlit>=1.30.0
-```
+`home.py` uses a **session-state router** pattern — all four pages (`home`, `about`, `certificates`, `contact`) are defined as functions inside a single file and rendered based on `st.session_state["page"]`. The sidebar buttons update the session state and trigger a `st.rerun()` to switch views.
 
-Create a `requirements.txt` with:
-
-```bash
-echo "streamlit>=1.30.0" > requirements.txt
-```
+The `pages/` folder contains standalone versions of each page (for reference or alternative multi-page deployment).
 
 ---
 
-## 🎨 Theme Colors
+## 🎨 Design System
 
-| Role | Color |
+| Element | Value |
 |---|---|
-| Primary / Accent | `#ec4899` (Hot Pink) |
-| Secondary | `#a855f7` (Purple) |
-| Background | `#1A0A1E` (Deep Plum) |
-| Sidebar | `#220A28` |
-| Text | `#F9F0F8` |
+| Background | `#1A0A1E` (deep dark purple) |
+| Primary Accent | `#ec4899` (pink) |
+| Secondary Accent | `#a855f7` (purple) |
+| Text Primary | `#F9F0F8` |
+| Text Muted | `#9B8CC4` |
+| Heading Font | Cormorant Garamond (serif) |
+| Body Font | DM Sans (sans-serif) |
+| Monospace Font | Space Mono |
 
 ---
 
-## 📁 Asset Files
+## 📦 Dependencies
 
-Make sure all image files are in the **same root folder** as `Home.py`:
+```
+streamlit>=1.32.0
+```
 
-| File | Purpose |
-|---|---|
-| `sheena.jpg` | Profile photo in hero section |
-| `cert1.png` | Python Essentials 1 certificate |
-| `cert2.png` | Cisco Packet Tracer certificate |
-| `cert3.jpg` | Databricks SQL Analytics certificate |
+All other libraries used (`base64`, `os`, `re`, `datetime`) are part of the Python standard library.
 
 ---
 
-## ✉️ Contact
+## 👩‍💻 Author
 
 **Sheena Marie Cordova**
-📧 sheenacordova7@gmail.com
-📍 Masbate, Philippines
-🏫 DEBESMSCAT — BS Computer Science, 3rd Year
+BS Computer Science · 3rd Year
+Dr. Emilio B. Espinosa Sr. Memorial State College of Agriculture and Technology (DEBESMSCAT)
+Masbate, Philippines
 
----
-
-*© 2025 Sheena Marie Cordova. All rights reserved.*
+- 📧 sheenacordova7@gmail.com
+- 🐙 github.com/sheena-cordova
+- 📘 fb.com/sheena.cordova
